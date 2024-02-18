@@ -1,0 +1,35 @@
+name: Rust
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  merge_group:
+env:
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  RUSTFLAGS: '-D warnings'
+  RUSTUP_MAX_RETRIES: 10
+  RUST_BACKTRACE: short
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - name: Install Rust toolchain
+        run: |
+          rustup update --no-self-update nightly
+          rustup component add rustfmt clippy
+      - name: Install cargo-nextest
+        uses: taiki-e/install-action@v2
+        with:
+          tool: nextest
+      - name: Build
+        run: cargo build
+      - name: Run tests
+        run: cargo nextest run
+      - name: Run clippy
+        run: cargo clippy
+      - name: Run fmt
+        run: cargo fmt --check
