@@ -71,15 +71,16 @@ impl Interned<str> {
     ///
     /// let a = Interned::new_str("amuro");
     /// let b = Interned::new_str("amuro");
+    ///
     /// assert_eq!(a, b);
     /// ```
     pub fn new_str(s: &str) -> Self {
         let (mut shard, hash) = Self::select(s);
 
         match shard.raw_entry_mut().from_key_hashed_nocheck(hash, s) {
-            RawEntryMut::Occupied(occ) => Self(occ.key().clone()),
-            RawEntryMut::Vacant(vac) => {
-                Self(vac.insert_hashed_nocheck(hash, Arc::from(s), NOOP).0.clone())
+            RawEntryMut::Occupied(occupied) => Self(occupied.key().clone()),
+            RawEntryMut::Vacant(vacant) => {
+                Self(vacant.insert_hashed_nocheck(hash, Arc::from(s), NOOP).0.clone())
             }
         }
     }

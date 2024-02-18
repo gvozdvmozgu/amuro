@@ -7,4 +7,4 @@ edition = "2021"
 ahash = "0.8.8"
 dashmap = { version = "=5.5.3", features = ["raw-api"] }
 hashbrown = "0.14.3"
-triomphe = { version = "0.1.10", default-features = false, features = ["std"] }
+triomphe = { version = "0.1.11", default-features = false, features = ["std"] }
