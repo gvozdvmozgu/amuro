@@ -169,6 +169,7 @@ impl<T: Internable + ?Sized> Drop for Interned<T> {
     }
 }
 
+#[macro_export]
 macro_rules! impl_internable {
     ( $($t:path),+ $(,)? ) => { $(
         impl $crate::Internable for $t {
