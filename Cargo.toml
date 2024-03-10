@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-ahash = "0.8.9"
+ahash = "0.8.11"
 dashmap = { version = "=5.5.3", features = ["raw-api"] }
 hashbrown = "0.14.3"
 triomphe = { version = "0.1.11", default-features = false, features = ["std"] }
