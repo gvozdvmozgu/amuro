@@ -34,6 +34,12 @@ impl<T: ?Sized> InternStorage<T> {
     }
 }
 
+impl<T: ?Sized> Default for InternStorage<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 pub trait Internable: Hash + Eq + 'static {
     fn storage() -> &'static InternStorage<Self>;
 
